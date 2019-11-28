@@ -1,0 +1,23 @@
+
+
+header{
+    border-bottom: 1px solid lightgray;
+     padding: 10px;
+    
+}
+.topnav-right {
+  float: right;
+}
+
+.main{
+   padding: 10px;
+}
+.hideshow
+{
+	display: none;
+	
+}
+.calnderstyle
+{
+	position: absolute; left: 150px; top: 37px;
+}
