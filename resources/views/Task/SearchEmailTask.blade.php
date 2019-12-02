@@ -105,8 +105,8 @@
            
         </div>
 
-        <div class="modal fade" id="empModal" role="dialog" style="width:100%">
-    <div class="modal-dialog">
+        <div class="modal fade" id="empModal" role="dialog" >
+    <div class="modal-dialog" style="max-width:100%;">
  
      <!-- Modal content-->
      <div class="modal-content">
@@ -297,7 +297,7 @@ function downloadCSV(csv, filename) {
 
     function getData(page){
      var formdata = $("#frmTaskList").serialize(); // here $(this) refere to the form its submitting
-     var url='/SearchEmailTask?page='+page;
+     //var url='/SearchEmailTask?page='+page;
     $.ajax({
         type: 'GET',
         url: '?page=' + page,
@@ -315,11 +315,15 @@ $(document).ready(function(){
   //alert("hi");
    
    var userid = $(this).data('id');
+   //alert(userid);
 
     $.ajax({
-        type: 'GET',
+        type: 'POST',
         url: "{{ url('/popup') }}",
-        data: userid, // here $(this) refers to the ajax object not form
+         data: {
+          "_token": "{{ csrf_token() }}",
+          "id": userid
+        },
         datatype: "html",
         success: function (data) {
         $('.modal-body').html(data);

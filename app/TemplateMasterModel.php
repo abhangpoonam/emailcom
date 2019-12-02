@@ -13,4 +13,13 @@ class TemplateMasterModel extends Model
     {
         return $this->belongsTo('App\DepartmentMasterModel','DepartmentMasterID');
     }
+    public function EmailTask()
+    {
+        return $this->hasMany('App\EmailTaskModel','MailTemplateID');
+    }
+     public function TaskTemplateSplitDetails()
+    {
+        return $this->hasMany('App\TaskTemplateSplitDetailsModel','MailTemplateID');
+    }
+    
 }

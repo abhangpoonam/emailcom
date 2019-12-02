@@ -29,6 +29,10 @@ class DepartmentMasterModel extends Model
     {
         return $this->hasMany('App\AllocatedDeptFromMailModel','DepartmentMasterID');
     }
+     public function EmailTask()
+    {
+        return $this->hasMany('App\EmailTaskModel','DepartmentMasterID');
+    }
    
    
 }

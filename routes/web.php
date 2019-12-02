@@ -35,5 +35,5 @@ Route::post( '/get/userselection', 'TaskController@load_userselection' )->name('
 Route::post( '/get/upload_task_csv', 'TaskController@upload_task_csv' )->name('upload_task_csv' );
 Route::post( '/store_task', 'TaskController@store_task' );
 Route::get( '/SearchEmailTask_Result', 'TaskController@SearchEmailTask_Result' );
-Route::get('/popup', 'TaskController@getPopup');
+Route::POST('/popup', 'TaskController@getPopup');
 

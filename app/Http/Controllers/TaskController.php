@@ -353,9 +353,47 @@ class TaskController extends Controller
      
     
    }
-   public function getPopup()
+   public function getPopup(Request $request)
    {
-     return view('Task.popup');
+      $template='';$templatedetail='';
+   $taskdetail=EmailTaskModelforScheduleType::where('GenerateMailWithSelectionID',$request->id)->first();
+   $task=EmailTaskModel::where('GenerateMailWithSelectionMasterID',$taskdetail->MasterSelectionID)->first();
+   //dd($task);
+      $taskdetail->templatename='';
+            if($taskdetail->MailTemplateID>0)
+              {
+                $template=$task->Template;
+                if($template)
+                {
+                  $taskdetail->templatename=$template->Name;
+                } 
+                 
+               }
+                 else
+               {
+                  if($taskdetail->MailTemplateID==-1)
+                  {
+                    $taskdetail->templatename="Select from source";
+
+                  }
+                  elseif($taskdetail->MailTemplateID==-2)
+                  {
+                     $taskdetail->templatename="Select from two";
+
+                  }
+                  elseif($taskdetail->MailTemplateID==-3)
+                  {
+                     $taskdetail->templatename="Create duplicate";
+
+                  }
+                  if($taskdetail->MailTemplateID==-4)
+                   {
+                     $taskdetail->templatename="Create new db";
+                   }
+
+                }
+     
+     return view('Task.popup',compact('taskdetail','task'));
 
    }
       

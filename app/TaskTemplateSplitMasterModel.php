@@ -9,7 +9,8 @@ class TaskTemplateSplitMasterModel extends Model
     protected $table = "tasktemplatesplitmaster";
     protected $primaryKey = "TaskSplitMasterID";
     protected $fillable = ['TaskID', 'Unit','Quantity', 'AutoCalResultDateTime',  'IsActive','CreatedBy','CreatedDate'];
-     public $timestamps = false;
+    public $timestamps = false;
+    protected $with= ['TaskTemplateSplitDetails'];
      public function Task()
     {
         return $this->belongsTo('App\EmailTaskModel','TaskID');

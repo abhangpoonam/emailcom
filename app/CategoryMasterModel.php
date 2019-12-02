@@ -22,5 +22,9 @@ class CategoryMasterModel extends Model
     {
         return $this->hasMany('App\SubCategoryMasterModel','CategoryID');
     }
+     public function EmailTask()
+    {
+        return $this->hasMany('App\EmailTaskModel','CategoryID');
+    }
    
 }

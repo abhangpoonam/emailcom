@@ -14,5 +14,9 @@ class SubCategoryMasterModel extends Model
     {
         return $this->belongsTo('App\CategoryMasterModel','CategoryID');
     }
+     public function EmailTask()
+    {
+        return $this->hasMany('App\EmailTaskModel','SubCategoryID');
+    }
 
 }

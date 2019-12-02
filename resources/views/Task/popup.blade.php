@@ -28,7 +28,7 @@
                                             <b>Task ID:</b>
                                         </td>
                                         <td align="left" width="70%">
-                                            <span id="rpGenerateMail_lblTaskID_0">180887</span>
+                                            <span id="rpGenerateMail_lblTaskID_0">{{$taskdetail->GenerateMailWithSelectionID}}</span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -36,7 +36,7 @@
                                             <b>Task Name:</b>
                                         </td>
                                         <td align="left">
-                                            <span id="rpGenerateMail_lblTaskName_0">Refund Request Initiated</span>
+                                            <span id="rpGenerateMail_lblTaskName_0">{{$taskdetail->Name}}</span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -44,7 +44,7 @@
                                             <b>Task Status:</b>
                                         </td>
                                         <td align="left">
-                                            <span id="rpGenerateMail_lblStatus_0">Emails Sent</span>
+                                            <span id="rpGenerateMail_lblStatus_0">{{$taskdetail->TaskStatus}}</span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -57,7 +57,7 @@
                                             Template Name:
                                         </td>
                                         <td align="left">
-                                            <span id="rpGenerateMail_lblMailTemplateName_0">Select Template From Source</span>
+                                            <span id="rpGenerateMail_lblMailTemplateName_0">{{$taskdetail->templatename}}</span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -65,7 +65,15 @@
                                             Source:
                                         </td>
                                         <td align="left">
-                                            <span id="rpGenerateMail_lblSource_0">From Database</span>
+                                            <span id="rpGenerateMail_lblSource_0">
+
+                                           @if($taskdetail->UseSQLServer==1)                                           
+                                            From Database
+                                            @else
+                                            from csv
+                                            @endif
+
+                                        </span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -73,7 +81,11 @@
                                             Source Name:
                                         </td>
                                         <td align="left">
-                                            <span id="rpGenerateMail_lblFileName_0">WHMAINDB</span>
+                                            <span id="rpGenerateMail_lblFileName_0"> @if($taskdetail->UseSQLServer==1)                                           
+                                            {{$taskdetail->SQLConnectionString}}
+                                            @else
+                                            {{$taskdetail->FileName}}
+                                            @endif</span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -81,7 +93,10 @@
                                             User Selection:
                                         </td>
                                         <td align="left">
-                                            <span id="rpGenerateMail_lblUserSelName_0">getWalletRefundInitiateEmailData</span>
+                                            <span id="rpGenerateMail_lblUserSelName_0">
+                                                @if($task->UserSelection) 
+                                                {{$task->UserSelection->UserSelectionName}}
+                                                @endif</span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -89,7 +104,9 @@
                                             From Mail:
                                         </td>
                                         <td align="left">
-                                            <span id="rpGenerateMail_lblFromMail_0">FirstCry.com <customercare@firstcry.com></span>
+                                            <span id="rpGenerateMail_lblFromMail_0"> @if($task->EmailSendFromGroupDetail) 
+                                                {{$task->EmailSendFromGroupDetail->EmailAddress}}
+                                                @endif</span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -97,7 +114,7 @@
                                             Process Start Date:
                                         </td>
                                         <td align="left">
-                                            <span id="rpGenerateMail_lblDataUpdateStartDateTime_0">27/11/2019 04:39:22 PM</span>
+                                            <span id="rpGenerateMail_lblDataUpdateStartDateTime_0">{{$taskdetail->ScheduleFromGenerate}}</span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -105,7 +122,7 @@
                                             Process End Date:
                                         </td>
                                         <td align="left">
-                                            <span id="rpGenerateMail_lblMailSentCompletedDateTime_0">27/11/2019 04:49:04 PM</span>
+                                            <span id="rpGenerateMail_lblMailSentCompletedDateTime_0">{{$taskdetail->ScheduleToGenerate}}</span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -126,7 +143,7 @@
                                             Total Mails:
                                         </td>
                                         <td align="left">
-                                            <span id="rpGenerateMail_lblTotalMails_0">469</span>
+                                            <span id="rpGenerateMail_lblTotalMails_0">{{$taskdetail->CSVRecordCount}}</span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -134,7 +151,7 @@
                                             Sent Mail:
                                         </td>
                                         <td align="left">
-                                            <span id="rpGenerateMail_Label3_0">469</span>
+                                            <span id="rpGenerateMail_Label3_0">{{$taskdetail->MailSentCount}}</span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -142,7 +159,7 @@
                                             Open Mail:
                                         </td>
                                         <td align="left">
-                                            <span id="rpGenerateMail_lblOpenCount_0">18</span>
+                                            <span id="rpGenerateMail_lblOpenCount_0">{{$taskdetail->OpenMailCount}}</span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -150,7 +167,7 @@
                                             Bounce Mail:
                                         </td>
                                         <td align="left">
-                                            <span id="rpGenerateMail_lblBounceMails_0">0</span>
+                                            <span id="rpGenerateMail_lblBounceMails_0">{{$taskdetail->BounceMailCount}}</span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -158,7 +175,7 @@
                                             Pending/Error Mail:
                                         </td>
                                         <td align="left">
-                                            <span id="rpGenerateMail_lblErrorMails_0">0</span>
+                                            <span id="rpGenerateMail_lblErrorMails_0">{{$taskdetail['GenerateMailCount']-$taskdetail['MailSentCount']}}</span>
                                         </td>
                                     </tr>
                                 
@@ -173,17 +190,15 @@
 		<table cellspacing="0" id="gvMultiTemplate" style="width:100%;border-collapse:collapse;">
 			<tr class="GridViewHeaderStyle">
 				<th scope="col">Template ID</th><th scope="col">Template Name</th><th scope="col">Sent Count</th><th scope="col">Open Count</th><th scope="col">Bounce/Error Count</th><th scope="col">&nbsp;</th>
-			</tr><tr class="GridViewRowStyle" onmouseover="this.style.color= &#39;#E39309&#39;;" onmouseout="this.style.color= &#39;#8C4510&#39;;">
-				<td>345</td><td>Refund Request Initiated With POID</td><td>467</td><td>18</td><td>0</td><td>
-                                                        <a id="gvMultiTemplate_lnkDomainDetails_0" href="javascript:__doPostBack(&#39;gvMultiTemplate$ctl02$lnkDomainDetails&#39;,&#39;&#39;)" style="color:Blue;">Details</a>
-                                                    </td>
-			</tr><tr class="GridViewAlternatingRowStyle" onmouseover="this.style.color= &#39;#E39309&#39;;" onmouseout="this.style.color= &#39;#8C4510&#39;;">
-				<td>1254</td><td>Refund Request Initiated Without POID</td><td>2</td><td>0</td><td>0</td><td>
-                                                        <a id="gvMultiTemplate_lnkDomainDetails_1" href="javascript:__doPostBack(&#39;gvMultiTemplate$ctl03$lnkDomainDetails&#39;,&#39;&#39;)" style="color:Blue;">Details</a>
-                                                    </td>
-			</tr><tr class="GridViewFooterStyle">
-				<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 			</tr>
+                @if($taskdetail->MailTemplateID>0)
+                  @if($task->Template)
+            <tr class="GridViewRowStyle" onmouseover="this.style.color= &#39;#E39309&#39;;" onmouseout="this.style.color= &#39;#8C4510&#39;;">
+				<td>{{$task->Template->MailTemplateID}}</td><td>{{$task->Template->Name}}</td><td>467</td><td>18</td><td>0</td><td>  <a id="gvMultiTemplate_lnkDomainDetails_0" href="javascript:__doPostBack(&#39;gvMultiTemplate$ctl02$lnkDomainDetails&#39;,&#39;&#39;)" style="color:Blue;">Details</a> </td>
+			</tr>
+                 @endif
+               @endif
+           
 		</table>
 	</div>
                                     </td>
@@ -191,10 +206,10 @@
                                 <tr>
                                     <td>
                                         <hr />
-                                        <span id="lblDetails" title="Refund Request Initiated">Domain wise details for task 'Refund Request Initiated'</span>
+                                        <!-- <span id="lblDetails" title="Refund Request Initiated">Domain wise details for task 'Refund Request Initiated'</span> -->
                                     </td>
                                 </tr>
-                                <tr>
+                               <!--  <tr>
                                     <td>
                                         <div>
 		<table cellspacing="0" id="gvGeneratedDomainWise" style="width:98%;border-collapse:collapse;">
@@ -222,7 +237,7 @@
 		</table>
 	</div>
                                     </td>
-                                </tr>
+                                </tr> -->
                             </table>
                         </td>
                     </tr>

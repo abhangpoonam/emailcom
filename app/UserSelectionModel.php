@@ -13,4 +13,8 @@ class UserSelectionModel extends Model
     {
         return $this->belongsTo('App\DepartmentMasterModel','DepartmentMasterID');
     }
+    public function EmailTask()
+    {
+        return $this->hasMany('App\EmailTaskModel','UserSelectionID');
+    }
 }

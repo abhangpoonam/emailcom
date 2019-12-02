@@ -14,5 +14,10 @@ class EmailSendFromGroupDetailModel extends Model
     {
         return $this->hasMany('App\AllocatedDeptFromMailModel','EmailSendFromGroupDetailID');
     }
+    public function EmailTask()
+    {
+        return $this->hasMany('App\EmailTaskModel','EmailSendFromGroupDetailID');
+    }
+   
 
 }
